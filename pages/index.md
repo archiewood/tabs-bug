@@ -1,5 +1,5 @@
 ---
-title: Dependent Dropdown does not filter the second dropdown selection
+title: Dependent Dropdown does not deselect the second dropdown selections that are not in the filtered list
 ---
 
 ```sql store_segmentation
@@ -65,6 +65,8 @@ FROM stores_data
 WHERE upper(store_type) IN ${inputs.selected_store_segmentation.value}
 ```
 
+# Repro
+
 <Dropdown 
   name=selected_store_segmentation 
   data={store_segmentation} 
@@ -83,3 +85,11 @@ WHERE upper(store_type) IN ${inputs.selected_store_segmentation.value}
   multiple= true
   selectAllByDefault=true
 />
+
+# Expected behavior
+
+When selecting a store type, the second dropdown should deselect the stores that do not match the selected store type.
+
+# Actual behavior
+
+The second dropdown filters the options list correctly, but any previously selected options are not deselected.
